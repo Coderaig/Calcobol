@@ -1,0 +1,45 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. Calculadora.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 Num1             PIC 9(5).
+01 Num2             PIC 9(5).
+01 Operacao         PIC X(1).
+01 Resultado        PIC 9(10).
+
+PROCEDURE DIVISION.
+
+Main-Program.
+    DISPLAY "Digite o primeiro número: ".
+    ACCEPT Num1.
+
+    DISPLAY "Digite a operação (+, -, , /): ".
+    ACCEPT Operacao.
+
+    DISPLAY "Digite o segundo número: ".
+    ACCEPT Num2.
+
+    COMPUTE Resultado = 0.
+
+    IF Operacao = "+"
+        COMPUTE Resultado = Num1 + Num2
+    ELSE IF Operacao = "-"
+        COMPUTE Resultado = Num1 - Num2
+    ELSE IF Operacao = ""
+        COMPUTE Resultado = Num1 * Num2
+    ELSE IF Operacao = "/"
+        IF Num2 = 0
+            DISPLAY "Não é possível dividir por zero!"
+            GOBACK
+        END-IF
+        COMPUTE Resultado = Num1 / Num2
+    ELSE
+        DISPLAY "Operação inválida!"
+        GOBACK
+    END-IF
+
+    DISPLAY "Resultado: " Resultado.
+    GOBACK.
+
+STOP RUN.
